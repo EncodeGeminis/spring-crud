@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GeminisdevApplication<geminisdev>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.crudspring.geminisdev.GeminisdevApplication",
+            "projectName": "geminisdev",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
