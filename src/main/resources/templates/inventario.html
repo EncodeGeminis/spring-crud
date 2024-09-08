@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario</title>
+</head>
+<body>
+    <section>
+        <h1>Inventario</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>subtotal</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="producto, contador: ${listaProductos}">
+                <td>[[${contador.count}]]</td>
+                <td>[[${producto.nombre}]]</td>
+                <td>[[${producto.precio}]]</td>
+                <td>[[${producto.cantidad}]]</td>
+                <td th:text="${producto.precio * producto.cantidad}"></td>
+                <td>
+                    <a th:href="@{/editar/{id}(id=${producto.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/eliminar/{id}(id=${producto.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <h1>Total</h1>
+        <h1 th:text="'$' + ${#numbers.formatDecimal(total, 1, 'COMMA', 2, 'POINT')}"></h1>
+    </div>
+    </section>
+</body>
+</html>
