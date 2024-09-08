@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "Producto")
+@Table (name = "producto")
 public class Producto implements Serializable {
     private static final long serialVersionUID=1L;
     @Id
@@ -17,12 +17,12 @@ public class Producto implements Serializable {
     @Column(name="nombre")
     private String nombre;
     @Column(name = "precio")
-    private String precio;
+    private double precio;
     @Column(name = "cantidad")
-    private String cantidad;
+    private double cantidad;
 
     private Producto(){}
-    private Producto(Long id, String nombre, String precio, String cantidad){
+    private Producto(Long id, String nombre, double precio, double cantidad){
         this.nombre=nombre;
         this.cantidad=cantidad;
         this.precio=precio;
@@ -40,17 +40,16 @@ public class Producto implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getPrecio() {
+    public double getPrecio() {
         return precio;
     }
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
-    public String getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
-    public void setCantidad(String cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
-    }
-    
+    }    
 }
