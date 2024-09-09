@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <section class="seccion-principal">
+        <form th:action="@{/guardarProducto}" method="POST" th:object="${producto}">
+            <div>
+                <label for="nombre">Producto: </label>
+                <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
+            </div>
+            <div>
+                <label for="precio">Precio: </label>
+                <input type="text" name="precio" id="precio" th:field="*{precio}">
+            </div>
+            <div>
+                <label for="cantidad">Cantidad: </label>
+                <input type="text" name="cantidad" id="cantidad" th:field="*{cantidad}">
+            </div>
+            <button type="submit">Subir</button>
+        </form>
+    </section>
+</body>
+</html>
