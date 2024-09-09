@@ -12,9 +12,25 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
+    <header></header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+            <div class="container">
+                <a th:href="@{/}" class="navbar-brand">Aplicacion Web Test</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-2">
+                            <a th:href="@{/}" class="nav-link active">Inicio</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
     <section>
-        <h1>Aplicacion Web Test</h1>
-    <div class="container">
+      <div class="container">
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
@@ -55,10 +71,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                 </div>
             </div>
         </div>
-    </div>
-    <div>
-        <h1>Total</h1>
-        <h1 th:text="'$' + ${#numbers.formatDecimal(total, 1, 'COMMA', 2, 'POINT')}"></h1>
+        <div>
+            <h1>Total</h1>
+            <h1 th:text="'$' + ${#numbers.formatDecimal(total, 1, 'COMMA', 2, 'POINT')}"></h1>
+        </div>
     </div>
     </section>
 </body>
