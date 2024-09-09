@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventas</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+            <div class="container">
+                <a th:href="@{/}" class="navbar-brand">Aplicacion Web Test</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-2">
+                            <a th:href="@{/}" class="nav-link active">Inicio</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--seccion titulo-->
+        <section id="main-heder" class="py-2 bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Ventas</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <section class="productos">
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Productos Disponibles</h2>
+                        </div>
+                        <div>
+                            <ul>
+                                <li th:each="producto : ${productos}">
+                                    <span th:text="${producto.nombre}">Producto</span>
+                                    <span th:text="${producto.cantidad}">Cantidad</span>
+                                    <span th:text="${producto.precio}">Precio</span>
+                                    <form th:action="@{/ventas/agregarProducto/{id}(id = ${producto.id})}" method="post">
+                                        <button class="btn btn-primary" type="submit">Agregar a la compra</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Lista de Compras</h2>
+                        </div>
+                        <div>
+                            <ul>
+                                <li th:each="compra : ${listaCompras}">
+                                    <span th:text="${compra.nombre}">Producto</span>
+                                    <span th:text="${compra.precio}">Precio</span>
+                                    <form th:action="@{/ventas/eliminarProducto/{id}(id=${compra.id})}" method="POST">
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </li>
+                            </ul>
+                            <h3>Total a pagar: <span th:text="${totalPagar}">0.0<span></h3>
+                                <form th:action="@{/ventas/pagar}" method="post">
+                                    <button class="btn btn-success btn-block" type="submit">Comprar</button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

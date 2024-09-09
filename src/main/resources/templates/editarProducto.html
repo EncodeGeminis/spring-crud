@@ -49,6 +49,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <form th:action="@{/guardarProducto}" th:object="${producto}" method="POST">
                 <input type="hidden" th:field="*{id}" name="idProducto">
                 <div class="form-group">
+                    <button class="btn btn-success" type="submit">Actualizar</button>
+                </div>
+                <div class="form-group">
                     <label for="nombre">Producto: </label>
                     <input class="form-control" type="text" name="nombre" th:field="*{nombre}">
                 </div>
@@ -64,7 +67,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <label for="categoria">Categoria: </label>
                     <input class="form-control" type="text" name="categoria" id="categoria" th:field="*{categoria}">
                 </div>
-                <button class="btn btn-success" type="submit">Actualizar</button>
             </form>
         </div>
     </section>

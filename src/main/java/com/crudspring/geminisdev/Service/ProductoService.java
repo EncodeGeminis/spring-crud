@@ -9,6 +9,7 @@ public interface ProductoService {
     public  void agregarProducto(Producto producto);
     public void eliminarProducto(Producto producto);
     public Producto buscarProducto(Producto producto);
+    public Producto buscarProductoPorId(Long id);
     public List<Producto> listarProductos();
     public List<String> listarCategoriasUnicas();
     public List<Producto> listarProductosCategorias(String categoria);
