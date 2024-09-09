@@ -30,7 +30,11 @@ public class ServiceProductoImpl implements ProductoService {
         var productoId = productoDao.findById(producto.getId()).orElse(null);
         return productoId;
     }
-
+    @Override
+    public Producto buscarProductoPorId(Long id){
+        return productoDao.findById(id).orElse(null);
+    }
+    
     @Override
     public List<Producto> listarProductos() {
         //se realiza un cast para poder recuperar el objeto lista
