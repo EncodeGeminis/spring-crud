@@ -5,39 +5,57 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Inventario</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
     <section>
-        <h1>Inventario</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>subtotal</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="producto, contador: ${listaProductos}">
-                <td>[[${contador.count}]]</td>
-                <td>[[${producto.nombre}]]</td>
-                <td>[[${producto.precio}]]</td>
-                <td>[[${producto.cantidad}]]</td>
-                <td th:text="${producto.precio * producto.cantidad}"></td>
-                <td>
-                    <a th:href="@{/editar/{id}(id=${producto.id})}">Editar</a>
-                </td>
-                <td>
-                    <a th:href="@{/eliminar/{id}(id=${producto.id})}">Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <h1>Aplicacion Web Test</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Inventario</h4>
+                        <a th:href="@{/agregarProducto}" class="btn btn-dark">Agregar Producto</a>
+                    </div>
+                    <div>
+                        <table class="table table-stryped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>subtotal</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="producto, contador: ${listaProductos}">
+                                    <td>[[${contador.count}]]</td>
+                                    <td>[[${producto.nombre}]]</td>
+                                    <td>[[${producto.precio}]]</td>
+                                    <td>[[${producto.cantidad}]]</td>
+                                    <td th:text="${producto.precio * producto.cantidad}"></td>
+                                    <td>
+                                        <a th:href="@{/editarProducto/{id}(id=${producto.id})}" class="btn btn-primary">Editar</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/eliminarProducto/{id}(id=${producto.id})}" class="btn btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div>
         <h1>Total</h1>
         <h1 th:text="'$' + ${#numbers.formatDecimal(total, 1, 'COMMA', 2, 'POINT')}"></h1>

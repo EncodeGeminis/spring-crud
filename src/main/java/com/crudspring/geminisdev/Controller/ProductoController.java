@@ -31,21 +31,20 @@ public class ProductoController {
 
     @GetMapping("/agregarProducto")
     public String agregarProducto(Producto producto) {
-        productoService.agregarProducto(producto);
-        return "modificarProducto";
+        return "agregarProducto";
     }
     @PostMapping("/guardarProducto")
     public String guardarProducto(Producto producto) {
-        productoService.eliminarProducto(producto);
+        productoService.agregarProducto(producto);
         return "redirect:/inventario";
     }
-    @GetMapping("/editar{id}")
+    @GetMapping("/editarProducto/{id}")
     public String editarProducto(Producto producto, Model model) {
         producto=productoService.buscarProducto(producto);
-        model.addAttribute("productos", producto);
-        return "modificarProducto"; 
+        model.addAttribute("producto", producto);
+        return "editarProducto"; 
     }
-    @GetMapping("/eliminar{id}")
+    @GetMapping("/eliminarProducto/{id}")
     public String eliminarProducto(Producto producto) {
         productoService.eliminarProducto(producto);
         return "redirect:/inventario";
