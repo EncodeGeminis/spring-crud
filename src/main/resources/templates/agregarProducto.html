@@ -1,33 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th:="http://www.w3.org/1999/xhtml" 
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <title>Agregar Producto</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
+
+    <header></header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+        <div class="container">
+            <a th:href="@{/}" class="navbar-brand">Aplicacion Web Test</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item px-2">
+                        <a th:href="@{/}" class="nav-link active">Inicio</a>
+                    </li>
+                    <li class="nav-item px-2"></li>
+                        <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--seccion titulo-->
+    <section id="main-heder" class="py-2 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Agregar Producto</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    </header>
+
     <section class="seccion-principal">
-        <form th:action="@{/guardarProducto}" method="POST" th:object="${producto}">
-            <div>
-                <label for="nombre">Producto: </label>
-                <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
-            </div>
-            <div>
-                <label for="precio">Precio: </label>
-                <input type="text" name="precio" id="precio" th:field="*{precio}">
-            </div>
-            <div>
-                <label for="cantidad">Cantidad: </label>
-                <input type="text" name="cantidad" id="cantidad" th:field="*{cantidad}">
-            </div>
-            <button type="submit">Subir</button>
-        </form>
+        <div class="container">
+            <form th:action="@{/guardarProducto}" method="POST" th:object="${producto}">
+                <div class="form-group">
+                    <label for="nombre">Producto: </label>
+                    <input class="form-control" type="text" name="nombre" id="nombre" th:field="*{nombre}">
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio: </label>
+                    <input class="form-control" type="text" name="precio" id="precio" th:field="*{precio}">
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad: </label>
+                    <input class="form-control" type="text" name="cantidad" id="cantidad" th:field="*{cantidad}">
+                </div>
+                <button type="submit" class="btn btn-success">Subir</button>
+            </form>
+        </div>
     </section>
 </body>
+
 </html>
