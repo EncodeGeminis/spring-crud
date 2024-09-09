@@ -37,4 +37,14 @@ public class ServiceProductoImpl implements ProductoService {
         var listaProductos = (List<Producto>) productoDao.findAll(); 
         return listaProductos;
     }
+
+    @Override
+    public List<String> listarCategoriasUnicas() {
+        return productoDao.findDistinctCategorias();
+    }
+
+    @Override
+    public List<Producto> listarProductosCategorias(String categoria) {
+        return productoDao.findByCategoria(categoria);
+    }
 }

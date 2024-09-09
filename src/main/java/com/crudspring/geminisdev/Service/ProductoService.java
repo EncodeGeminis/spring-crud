@@ -10,4 +10,6 @@ public interface ProductoService {
     public void eliminarProducto(Producto producto);
     public Producto buscarProducto(Producto producto);
     public List<Producto> listarProductos();
+    public List<String> listarCategoriasUnicas();
+    public List<Producto> listarProductosCategorias(String categoria);
 }
