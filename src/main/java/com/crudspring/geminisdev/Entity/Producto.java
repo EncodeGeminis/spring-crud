@@ -20,6 +20,8 @@ public class Producto implements Serializable {
     private double precio;
     @Column(name = "cantidad")
     private double cantidad;
+    @Column(name = "categoria")
+    private String categoria;
 
     private Producto(){}
     private Producto(Long id, String nombre, double precio, double cantidad){
@@ -51,5 +53,11 @@ public class Producto implements Serializable {
     }
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
-    }    
+    } 
+    public void setCategoria(String categoria){
+        this.categoria=categoria;
+    }   
+    public String getCategoria(){
+        return categoria;
+    }
 }

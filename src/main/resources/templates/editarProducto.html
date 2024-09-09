@@ -60,6 +60,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <label for="cantidad">Cantidad: </label>
                     <input class="form-control" type="text" name="cantidad" th:field="*{cantidad}">
                 </div>
+                <div class="form-group"></div>
+                    <label for="categoria">Categoria: </label>
+                    <input class="form-control" type="text" name="categoria" id="categoria" th:field="*{categoria}">
+                </div>
                 <button class="btn btn-success" type="submit">Actualizar</button>
             </form>
         </div>
