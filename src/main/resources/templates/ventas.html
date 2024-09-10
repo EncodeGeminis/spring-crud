@@ -61,6 +61,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                                     <form th:action="@{/ventas/agregarProducto/{id}(id = ${producto.id})}" method="post">
                                         <button class="btn btn-primary" type="submit">Agregar a la compra</button>
                                     </form>
+                                    
                                 </li>
                             </ul>
                         </div>
@@ -84,6 +85,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                             <h3>Total a pagar: <span th:text="${totalPagar}">0.0<span></h3>
                                 <form th:action="@{/ventas/pagar}" method="post">
                                     <button class="btn btn-success btn-block" type="submit">Comprar</button>
+                                </form>
+                                <form th:action="@{/ventas/eliminarCompra}" method="POST">
+                                    <button class="btn btn-danger btn-block" type="submit">Eliminar Compra</button>
                                 </form>
                         </div>
                     </div>

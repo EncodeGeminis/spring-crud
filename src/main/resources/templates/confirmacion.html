@@ -29,7 +29,16 @@
                 <div class="col">
                     <div class="card mt-6">
                         <h1>Finalizar Compra</h1>
+                        <h2>Ticket de Compra</h2>
+                        <p th:text="${total}"></p>
+                        <p><strong>Total con Descuento: </strong><span th:text="${totalDescuento}"></span></p>
+                        <p><strong>Descuento aplicado: </strong><span th:text="${porcentaje}"></span></p>
                         <p th:text="${mensaje}"></p>
+                        <div th:each="lista : ${listaCompras}">
+                            <p th:text="${lista.nombre}"></p>
+                            <p th:text="${lista.precio}"></p>
+                        </div>
+                        
                         <a class="btn btn-info" th:href="@{/ventas/volverVentas}">Volver a la pagina anterior</a>
                     </div>
                 </div>
