@@ -9,7 +9,7 @@ import com.crudspring.geminisdev.Dao.ProductoDao;
 import com.crudspring.geminisdev.Entity.Producto;
 import com.crudspring.geminisdev.Service.ProductoService;
 
-@Service("ServiceProducto")
+@Service("ProductoService")
 public class ServiceProductoImpl implements ProductoService {
 
     @Autowired

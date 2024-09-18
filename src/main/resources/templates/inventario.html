@@ -12,7 +12,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-    <header></header>
+    <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">
                 <a th:href="@{/}" class="navbar-brand">Aplicacion Web Test</a>
@@ -24,7 +24,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                         <li class="nav-item px-2">
                             <a th:href="@{/}" class="nav-link active">Inicio</a>
                         </li>
-                        <li class="nav-item px-2"></li>
+                        <li class="nav-item px-2">
+                            <a th:href="@{/usuarios/lista}" class="nav-link active">Usuarios</a>
+                        </li>
+                        <li class="nav-item px-2">
                             <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
                         </li>
                     </ul>
@@ -76,8 +79,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                                 <tr th:each="producto, contador: ${listaProductos}">
                                     <td>[[${contador.count}]]</td>
                                     <td>[[${producto.nombre}]]</td>
-                                    <td>[[${producto.precio}]]</td>
                                     <td>[[${producto.cantidad}]]</td>
+                                    <td>[[${producto.precio}]]</td>
                                     <td>[[${producto.categoria}]]</td>
                                     <td th:text="${producto.precio * producto.cantidad}"></td>
                                     <td>

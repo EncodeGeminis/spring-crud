@@ -33,6 +33,7 @@
                         <p th:text="${total}"></p>
                         <p><strong>Total con Descuento: </strong><span th:text="${totalDescuento}"></span></p>
                         <p><strong>Descuento aplicado: </strong><span th:text="${porcentaje}"></span></p>
+                        <p><strong>Puntos adquiridos <span th:text="${puntos}"></span></strong></p>
                         <p th:text="${mensaje}"></p>
                         <div th:each="lista : ${listaCompras}">
                             <p th:text="${lista.nombre}"></p>
