@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Usuario</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <form th:action="@{/usuarios/guardarUsuario}" method="post">
+                        <div class="form-group">
+                            <h1>Registrar Usuario</h1>
+                            <input type="text" placeholder="nombre" name="nombre" class="form-control">
+                            <input type="text" placeholder="edad" name="edad" class="form-control">
+                            <input type="text" placeholder="telefono" name="telefono" class="form-control">
+                            <input type="text" placeholder="puntos" name="puntos" class="form-control">
+                            <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
