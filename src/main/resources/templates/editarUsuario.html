@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista Usuarios</title>
+    <title>Editar Usuario</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -11,7 +11,6 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">
@@ -27,7 +26,7 @@
                         <li class="nav-item px-2">
                             <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
                         </li>
-                        <li class="nav-item px-2"></li>
+                        <li class="nav-item px-2">
                             <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
                         </li>
                     </ul>
@@ -35,36 +34,22 @@
             </div>
         </nav>
     </header>
-
     <div class="container">
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
-                    <table class="table table-stryped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Edad</th>
-                                <th>Telefono</th>
-                                <th>Puntos</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="usuario : ${usuarios}">
-                                <td>[[${usuario.nombre}]]</td>
-                                <td>[[${usuario.edad}]]</td>
-                                <td>[[${usuario.telefono}]]</td>
-                                <td>[[${usuario.puntos}]]</td>
-                                <td>
-                                        <a th:href="@{/usuarios/editarUsuario/{id}(id=${usuario.idUsuario})}" class="btn btn-primary">Editar</a>
-                                        <a th:href="@{/usuarios/eliminarUsuario/{id}(id=${usuario.idUsuario})}" class="btn btn-danger">Eliminar</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <form th:action="@{/usuarios/actualizarUsuario}" method="post">
+                        <div class="form-group">
+                            <h1>Editar Usuario</h1>
+                            <input type="hidden" name="idUsuario" th:value="${usuario.idUsuario}">
+                            <input type="text" placeholder="nombre" name="nombre" class="form-control" th:value="${usuario.nombre}">
+                            <input type="text" placeholder="edad" name="edad" class="form-control" th:value="${usuario.edad}">
+                            <input type="text" placeholder="telefono" name="telefono" class="form-control" th:value="${usuario.telefono}">
+                            <input type="text" placeholder="puntos" name="puntos" class="form-control" th:value="${usuario.puntos}">
+                            <button class="btn btn-primary btn-block" type="submit">Actualizar</button>
+                        </div>
+                    </form>
                 </div>
-                <a th:href="@{/usuarios/nuevo}" class="btn btn-success">Agregar Usuario</a>
             </div>
         </div>
     </div>
