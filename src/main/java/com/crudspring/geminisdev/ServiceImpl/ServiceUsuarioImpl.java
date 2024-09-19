@@ -21,8 +21,8 @@ public class ServiceUsuarioImpl implements UsuarioService{
     }
 
     @Override
-    public void eliminarUsuario(Usuario usuario) {
-        usuarioDao.delete(usuario);
+    public void eliminarUsuario(Long id) {
+        usuarioDao.deleteById(id);
     }
 
     @Override
@@ -46,5 +46,20 @@ public class ServiceUsuarioImpl implements UsuarioService{
     @Override
     public Usuario buscarPorNombre(String nombre){
         return usuarioDao.findByNombre(nombre);
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioDao.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id " + id));
+    }
+
+    @Override
+    public void actualizarUsuario(Usuario usuario) {
+        if (usuarioDao.existsById(usuario.getIdUsuario())) {
+            usuarioDao.save(usuario);
+        } else {
+            throw new RuntimeException("Usuario no encontrado con id " + usuario.getIdUsuario());
+        }
     }
 }

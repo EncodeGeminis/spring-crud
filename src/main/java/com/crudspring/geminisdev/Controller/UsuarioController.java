@@ -11,6 +11,7 @@ import com.crudspring.geminisdev.Service.UsuarioService;
 import com.crudspring.geminisdev.Service.VentasService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -48,6 +49,22 @@ public class UsuarioController {
         usuarioService.agregarUsuario(usuario);
         return "redirect:/ventas";
     }
-    
-    
+    @GetMapping("/eliminarUsuario/{id}")
+    public String eliminarUsuario(@PathVariable("id") Long id) {
+        usuarioService.eliminarUsuario(id);
+        return "redirect:/usuarios/lista";
+    }
+
+    @GetMapping("/editarUsuario/{id}")
+    public String editarUsuario(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
+        model.addAttribute("usuario", usuario);
+        return "editarUsuario"; // Nombre de la plantilla de editar usuario
+    }
+
+    @PostMapping("/actualizarUsuario")
+    public String actualizarUsuario(Usuario usuario) {
+        usuarioService.actualizarUsuario(usuario);
+        return "redirect:/usuarios/lista"; // O la página a la que desees redirigir
+    }
 }
