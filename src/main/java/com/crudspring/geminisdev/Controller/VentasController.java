@@ -20,7 +20,10 @@ import com.crudspring.geminisdev.Service.VentasService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+
+
 
 @Controller
 @RequestMapping("/ventas")
@@ -119,9 +122,9 @@ public class VentasController {
 
         for(Producto producto : listaCompras){
             DetalleVenta detalleVenta = new DetalleVenta();
-            detalleVenta.setNombreProducto(producto.getNombre());
+            detalleVenta.setNombre(producto.getNombre());
             detalleVenta.setCantidad(1);
-            detalleVenta.setPrecioUnitarion(producto.getPrecio());
+            detalleVenta.setPrecio(producto.getPrecio());
             detalleVenta.setVenta(venta);
             detallesVenta.add(detalleVenta);
         }
@@ -177,5 +180,25 @@ public class VentasController {
     public String irVentas() {
         return "redirect:/ventas";
     }
+    @GetMapping("/historialVentas")
+    public String mostrarHistorialVentas(Model model) {
+        List<Venta> historialVentas= ventasService.historialVentas();
+        model.addAttribute("historialVentas", historialVentas);
+        return "historialVentas";
+    }
+    @GetMapping("/mostrarDetallesVenta")
+    public String mostrarDetallesVenta(@RequestParam("id") Long id, Model model) {
+        //buscar la venta por id 
+        Venta venta = ventasService.buscarVentaPorId(id);
+        if (venta != null) {
+            //buscar los detalles de la venta 
+            List<DetalleVenta> detallesVenta = ventasService.buscarDetallesVentaPorId(id);
+            //se agrega la venta y los detalles al modelo 
+            model.addAttribute("venta", venta);
+            model.addAttribute("detallesVenta", detallesVenta);
+    }
+    return "detallesVenta";
+}
+    
 
 }

@@ -43,11 +43,11 @@ public class DetalleVenta implements Serializable {
         this.idOrden = idOrden;
     }
 
-    public String getNombreProducto() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombreProducto(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -59,11 +59,11 @@ public class DetalleVenta implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public double getPrecioUnitarion() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecioUnitarion(double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -74,7 +74,5 @@ public class DetalleVenta implements Serializable {
     public void setVenta(Venta venta) {
         this.venta = venta;
     }
-
-
-    
+      
 }

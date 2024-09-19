@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th:="http://www.w3.org/1999/xhtml" 
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pagina principal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Compras</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -12,6 +11,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">
@@ -30,9 +30,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                         <li class="nav-item px-2"></li>
                             <a th:href="@{/usuarios/lista}" class="nav-link active">Usuarios</a>
                         </li>
-                        <li class="nav-item px-2"></li>
-                            <a th:href="@{/ventas/historialVentas}" class="nav-link active">Historial</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -43,11 +40,43 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1>Pagina Principal</h1>
+                        <h1>Historial de Ventas</h1>
                     </div>
                 </div>
             </div>
         </section>
     </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <table class="table table-dryed">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th># Orden</th>
+                                <th>Total</th>
+                                <th>Descuento</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="historial : ${historialVentas}">
+                                <td>[[${historial.id}]]</td>
+                                <td>[[${historial.total}]]</td>
+                                <td>[[${historial.descuento}]]</td>
+                                <td>
+                                    <form th:action="@{/ventas/mostrarDetallesVenta}" method="get">
+                                        <input type="hidden" name="id" th:value="${historial.id}">
+                                        <button class="btn btn-info">+ detalles</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

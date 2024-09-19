@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DetallesVentas</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+            <div class="container">
+                <a th:href="@{/}" class="navbar-brand">Aplicacion Web Test</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/usuarios/lista}" class="nav-link active">Usuarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--seccion titulo-->
+        <section id="main-heder" class="py-2 bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Detalles Venta</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Venta ID: <span th:text="${venta.id}"></span></h3>
+                          
+                    </div>
+                    <div class="card-body">
+    
+                            <h2>Artículos Vendidos</h2>
+                            <table class="table table-gryped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="detalle : ${detallesVenta}">
+                                        <td th:text="${detalle.nombre}"></td>
+                                        <td th:text="${detalle.cantidad}"></td>
+                                        <td th:text="${detalle.precio}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        
+                            </div>
+                    </div>
+                    <div class="card-footer">
+                        <h3>Total: <span th:text="${venta.total}"></span></h3>
+                        <h3>Descuento: <span th:text="${venta.descuento}"></span></h3>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
