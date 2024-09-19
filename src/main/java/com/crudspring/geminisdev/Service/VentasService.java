@@ -2,6 +2,7 @@ package com.crudspring.geminisdev.Service;
 
 import java.util.List;
 
+import com.crudspring.geminisdev.Entity.DetalleVenta;
 import com.crudspring.geminisdev.Entity.Producto;
 import com.crudspring.geminisdev.Entity.Venta;
 
@@ -15,5 +16,8 @@ public interface VentasService {
 
     public Venta guardarVenta(Venta venta);
     public List<Venta> historialVentas();
+
+    public Venta buscarVentaPorId(Long id);
+    public List<DetalleVenta> buscarDetallesVentaPorId(Long id);
 
 }

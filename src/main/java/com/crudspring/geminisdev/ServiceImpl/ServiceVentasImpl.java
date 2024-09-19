@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crudspring.geminisdev.Dao.DetalleVentaDao;
 import com.crudspring.geminisdev.Dao.VentaDao;
+import com.crudspring.geminisdev.Entity.DetalleVenta;
 import com.crudspring.geminisdev.Entity.Producto;
 import com.crudspring.geminisdev.Entity.Venta;
 import com.crudspring.geminisdev.Service.ProductoService;
@@ -20,6 +22,8 @@ public class ServiceVentasImpl implements VentasService {
 
     @Autowired
     VentaDao ventaDao;
+    @Autowired
+    DetalleVentaDao detalleVentaDao;
 
     private List<Producto> listaProductos = new ArrayList<>();
     private List<Producto> listaCompras = new ArrayList<>();
@@ -53,6 +57,14 @@ public class ServiceVentasImpl implements VentasService {
     }
     public List<Venta> historialVentas(){
         return ventaDao.findAll();
+    }
+    @Override
+    public Venta buscarVentaPorId(Long id) {
+        return ventaDao.findById(id).orElse(null);
+     }
+    @Override
+    public List<DetalleVenta> buscarDetallesVentaPorId(Long ventaId) {
+        return detalleVentaDao.findByVentaId(ventaId);
     }
 
 }
