@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th:="http://www.w3.org/1999/xhtml" 
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Pagina principal</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Empleado</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
-    <header>
+
+    <header></header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">
                 <a th:href="@{/}" class="navbar-brand">Aplicacion Web Test</a>
@@ -26,9 +28,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                         </li>
                         <li class="nav-item px-2"></li>
                             <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
-                        </li>
-                        <li class="nav-item px-2"></li>
-                            <a th:href="@{/usuarios/lista}" class="nav-link active">Usuarios</a>
                         </li>
                         <li class="nav-item px-2"></li>
                             <a th:href="@{/empleados/listaEmpleados}" class="nav-link active">Empleados</a>
@@ -46,11 +45,40 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1>Pagina Principal</h1>
+                        <h1>Editar Informacion Empleados</h1>
                     </div>
                 </div>
             </div>
         </section>
     </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <form th:action="@{/empleados/editarEmpleado}" th:object="${empleado}" method="POST">
+                        <input type="hidden" th:field="*{idEmpleado}" name="idEmpleado">
+                        
+                        <div class="form-group">
+                            <label for="nombre">Nombre: </label>
+                            <input class="form-control" type="text" name="nombre" th:field="*{nombre}">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Telefono: </label>
+                            <input class="form-control" type="text" name="telefono" th:field="*{telefono}">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Edad: </label>
+                            <input class="form-control" type="text" name="edad" th:field="*{edad}">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block" type="submit">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
