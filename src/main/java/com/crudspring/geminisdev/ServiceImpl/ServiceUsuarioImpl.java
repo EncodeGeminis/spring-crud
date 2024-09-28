@@ -3,7 +3,8 @@ package com.crudspring.geminisdev.ServiceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.crudspring.geminisdev.Dao.UsuarioDao;
@@ -38,13 +39,13 @@ public class ServiceUsuarioImpl implements UsuarioService{
         var usuarioId = usuarioDao.findById(id).orElse(null);
         return usuarioId;
     }
-
-    @Override
+    /*
+     @Override
     public List<Usuario> listarUsuarios() {
         List<Usuario> lista = (List<Usuario>) usuarioDao.findAll();
         return lista;
     }
-
+     */
     @Override
     public Usuario buscarPorNombre(String nombre){
         return usuarioDao.findByNombre(nombre);
@@ -68,8 +69,25 @@ public class ServiceUsuarioImpl implements UsuarioService{
     public List<Usuario> buscarListaNombres(String nombre){
         return usuarioDao.buscarListaPorNombre(nombre);
     }
-    @Override
+    /*
+     @Override
     public List<Usuario> buscarPorNombreParcial(String nombre){
         return usuarioDao.buscarPorNombreParcial(nombre);
+    }
+     */
+
+    @Override
+    public Page<Usuario> listarUsuarios(Pageable pageable) {
+        return usuarioDao.findAll(pageable);
+    }
+
+    @Override
+    public Page<Usuario> buscarUsuarioPorNombre(String nombre, Pageable pageable) {
+        return usuarioDao.findAllByNombreContaining(nombre, pageable);
+    }
+
+    @Override
+    public Page<Usuario> buscarPorNombreParcial(String nombre, Pageable pageable) {
+        return usuarioDao.buscarPorNombreParcial(nombre, pageable);
     }
 }

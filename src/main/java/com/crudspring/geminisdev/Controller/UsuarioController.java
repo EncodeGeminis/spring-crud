@@ -1,7 +1,9 @@
 package com.crudspring.geminisdev.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +29,13 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping("/lista")
-    public String listaUsuarios(Model model) {
-        var usuarios = usuarioService.listarUsuarios();
+    public String listaUsuarios(@RequestParam(name = "page", defaultValue= "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(page, 4);
+        Page<Usuario> usuarioPage = usuarioService.listarUsuarios(pageable);
         // Agregar atributos al modelo
-    model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuarios", usuarioPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usuarioPage.getTotalPages());
         return "Usuarios";
     }
 
@@ -70,15 +75,26 @@ public class UsuarioController {
         return "redirect:/usuarios/lista"; // O la página a la que desees redirigir
     }
     @GetMapping("/buscarPorNombre")
-    public String buscarPorNombre(@RequestParam("nombre") String nombre, Model model) {
-        var usuarios = usuarioService.buscarListaNombres(nombre);
-        model.addAttribute("usuarios", usuarios);
+    public String buscarPorNombre(@RequestParam("nombre") String nombre,
+        @RequestParam(name="page", defaultValue = "0") int page, Model model) {
+            Pageable pageable = PageRequest.of(page, 4);
+            Page <Usuario> usuarios = usuarioService.buscarUsuarioPorNombre(nombre, pageable);
+
+        model.addAttribute("usuarios", usuarios.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usuarios.getTotalPages());
         return "Usuarios";
     }
     @GetMapping("/buscarPorNombreParcial")
-    public String buscarPorNombreParcial(@RequestParam("nombre") String nombre, Model model) {
-        var usuarios = usuarioService.buscarPorNombreParcial(nombre);
-        model.addAttribute("usuarios", usuarios);
+    public String buscarPorNombreParcial(@RequestParam("nombre") String nombre,
+    @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(page, 4);
+        Page<Usuario> usuarios = usuarioService.buscarPorNombreParcial(nombre, pageable);
+
+        model.addAttribute("usuarios", usuarios.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usuarios.getTotalPages());
+        
         return "Usuarios";
     }
 }

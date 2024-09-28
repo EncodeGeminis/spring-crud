@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista Usuarios</title>
+    <!--css icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--End css icons-->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -92,6 +95,30 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li th:class="${currentPage == 0 ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/usuarios/lista(page=0)}">Primero</a>
+                                </li>
+                                <li th:class="${currentPage == 0 ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/usuarios/lista(page=${currentPage - 1})}"><i
+                                            class='bx bxs-left-arrow'></i></a>
+                                </li>
+                
+                                <li th:each="page : ${#numbers.sequence(0, totalPages - 1)}"
+                                    th:class="${currentPage == page ? 'page-item active' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/usuarios/lista(page=${page})}">[[${page + 1}]]</a>
+                                </li>
+                
+                                <li th:class="${currentPage == totalPages - 1 ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/usuarios/lista(page=${currentPage + 1})}"><i
+                                            class='bx bxs-right-arrow'></i></a>
+                                </li>
+                                <li th:class="${currentPage == totalPages - 1 ? 'page-item disabled' : 'page-item'}">
+                                    <a class="page-link" th:href="@{/usuarios/lista(page=${totalPages - 1})}">Ultimo</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <a th:href="@{/usuarios/nuevo}" class="btn btn-success">Agregar Usuario</a>

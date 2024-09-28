@@ -15,12 +15,18 @@ import com.crudspring.geminisdev.Entity.Usuario;
 @Repository
 public interface UsuarioDao extends JpaRepository<Usuario, Long> {
     Usuario findByNombre(String nombre);
+    //metodo que busca todos los usuarios que contienen el mismo nombre 
+    Page<Usuario> findAllByNombreContaining(String nombre, Pageable pageable);
+
     //JPQL para buscar empleados por nombre
     @Query("SELECT u FROM Usuario u WHERE u.nombre = :nombre")
     List<Usuario> buscarListaPorNombre(@Param("nombre") String nombre);
+    
     //metodo para buscar el nombre parcial del usuario
     @Query("SELECT u FROM Usuario u WHERE u.nombre LIKE %:nombre%")
-    List<Usuario> buscarPorNombreParcial(@Param("nombre") String nombre);
+    Page<Usuario> buscarPorNombreParcial(@Param("nombre") String nombre, Pageable pageable);
+    //List<Usuario> buscarPorNombreParcial(@Param("nombre") String nombre);
+    
     //uso de paginacion para mostrar resultados filtrados
     //busqueda con paginacion
     @Query("SELECT u FROM Usuario u")
