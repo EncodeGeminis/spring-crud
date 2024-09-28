@@ -18,4 +18,9 @@ public interface ProductoDao extends JpaRepository<Producto, Long> {
     // Consulta para obtener categorías únicas sin necesidad de otra tabla
     @Query("SELECT DISTINCT p.categoria FROM Producto p WHERE p.categoria IS NOT NULL")
     List<String> findDistinctCategorias();
+    
+    //Se agrega una consulta nativa de SQL para buscar por nombre
+    @Query(value = "SELECT * FROM producto WHERE nombre = :nombre", nativeQuery = true)
+    List<Producto> buscarPorNombre(@Param("nombre") String nombre);
+
 }

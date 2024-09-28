@@ -77,5 +77,17 @@ public class ProductoController {
         productoService.eliminarProducto(producto);
         return "redirect:/inventario";
     }
+    @GetMapping("/inventario/buscarPorNombre")
+    public String buscarPorNombre(@RequestParam("nombre") String nombre, Model model) {
+        var productos = productoService.buscarProductoPorNombre(nombre);
+        int total=0;
+        for (Producto producto : productos) {
+            total+=producto.getCantidad()*producto.getPrecio();
+        }
+        model.addAttribute("listaProductos", productos);
+        model.addAttribute("total", total);
+        return "inventario";
+    }
+    
     
 }

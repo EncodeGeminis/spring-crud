@@ -19,10 +19,3 @@ public interface EmpleadoDao extends JpaRepository<Empleado, Long>{
     //se buscan los empleados que contengan un valor dado.
     List<Empleado> findByNombreContaining(String nombre, Pageable pageable);
 }
-/*
-    //consultas nativas de Sql en spring 
-    //se hace una consulta nativa para buscar por nombre
-    @Query(value = "SELECT * FROM empleado WHERE nombre = :nombre", nativeQuery = true)
-    List<Empleado> buscarPorNombreNativo(@Param("nombre")String nombre);
-
- */

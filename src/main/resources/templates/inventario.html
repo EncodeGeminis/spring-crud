@@ -59,10 +59,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                                 <button class="btn btn-success" type="submit">Filtrar</button>
                             </form> 
                         </div>
+                        <div>
+                            <form th:action="@{/inventario/buscarPorNombre}" method="get" class="form-group">
+                                <label for="nombre">Buscar por nombre: </label>
+                                <input type="text" class="form-control" name="nombre" id="nombre">
+                                <button class="btn btn-success mt-3" type="submit">Buscar</button>
+                            </form>
+                        </div>
 
                     </div>
                     <div>
-                        <table class="table table-stryped">
+                        <table class="table table-striped">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
