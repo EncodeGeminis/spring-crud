@@ -3,11 +3,13 @@ package com.crudspring.geminisdev.ServiceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.crudspring.geminisdev.Dao.UsuarioDao;
 import com.crudspring.geminisdev.Entity.Usuario;
 import com.crudspring.geminisdev.Service.UsuarioService;
+
 
 @Service("UsuarioService")
 public class ServiceUsuarioImpl implements UsuarioService{
@@ -61,5 +63,13 @@ public class ServiceUsuarioImpl implements UsuarioService{
         } else {
             throw new RuntimeException("Usuario no encontrado con id " + usuario.getIdUsuario());
         }
+    }
+    @Override
+    public List<Usuario> buscarListaNombres(String nombre){
+        return usuarioDao.buscarListaPorNombre(nombre);
+    }
+    @Override
+    public List<Usuario> buscarPorNombreParcial(String nombre){
+        return usuarioDao.buscarPorNombreParcial(nombre);
     }
 }

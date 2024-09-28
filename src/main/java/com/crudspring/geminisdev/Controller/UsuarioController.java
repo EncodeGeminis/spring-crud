@@ -1,6 +1,7 @@
 package com.crudspring.geminisdev.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,8 @@ public class UsuarioController {
     @GetMapping("/lista")
     public String listaUsuarios(Model model) {
         var usuarios = usuarioService.listarUsuarios();
-        model.addAttribute("usuarios", usuarios);
+        // Agregar atributos al modelo
+    model.addAttribute("usuarios", usuarios);
         return "Usuarios";
     }
 
@@ -66,5 +68,17 @@ public class UsuarioController {
     public String actualizarUsuario(Usuario usuario) {
         usuarioService.actualizarUsuario(usuario);
         return "redirect:/usuarios/lista"; // O la página a la que desees redirigir
+    }
+    @GetMapping("/buscarPorNombre")
+    public String buscarPorNombre(@RequestParam("nombre") String nombre, Model model) {
+        var usuarios = usuarioService.buscarListaNombres(nombre);
+        model.addAttribute("usuarios", usuarios);
+        return "Usuarios";
+    }
+    @GetMapping("/buscarPorNombreParcial")
+    public String buscarPorNombreParcial(@RequestParam("nombre") String nombre, Model model) {
+        var usuarios = usuarioService.buscarPorNombreParcial(nombre);
+        model.addAttribute("usuarios", usuarios);
+        return "Usuarios";
     }
 }

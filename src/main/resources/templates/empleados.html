@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th:="http://www.w3.org/1999/xhtml" 
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleados</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
 
     <header>
@@ -24,16 +25,16 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav">
                         <li class="nav-item px-2"></li>
-                            <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
+                        <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
                         </li>
                         <li class="nav-item px-2"></li>
-                            <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
+                        <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
                         </li>
                         <li class="nav-item px-2"></li>
-                            <a th:href="@{/empleados/listaEmpleados}" class="nav-link active">Empleados</a>
+                        <a th:href="@{/empleados/listaEmpleados}" class="nav-link active">Empleados</a>
                         </li>
                         <li class="nav-item px-2"></li>
-                            <a th:href="@{/ventas/historialVentas}" class="nav-link active">Historial</a>
+                        <a th:href="@{/ventas/historialVentas}" class="nav-link active">Historial</a>
                         </li>
                     </ul>
                 </div>
@@ -56,33 +57,97 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
-                    <table class="table table-gryped">
-                        <thead class="thead thead-dark">
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Edad</th>
-                                <th>Telefono</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="empleado, contador : ${empleados}">
-                                <td>[[${contador.count}]]</td>
-                                <td>[[${empleado.nombre}]]</td>
-                                <td>[[${empleado.edad}]]</td>
-                                <td>[[${empleado.telefono}]]</td>
-                                <td>
-                                    <a th:href="@{/empleados/editarEmpleado/{id}(id=${empleado.idEmpleado})}" class="btn btn-info">Editar</a>
-                                    <a th:href="@{/empleados/eliminarEmpleado/{id}(id=${empleado.idEmpleado})}" class="btn btn-danger">Eliminar</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <a th:href="@{/empleados/agregarEmpleado}" class="btn btn-success">Agregar</a>
+                    <div class="card-header">
+                        <label for="metodoBusqueda">Seleccione un metodo de busqueda</label>
+                        <select id="metodoBusqueda" class="form-control" onchange="mostrarFormulario()">
+                            <option value="default">buscar</option>
+                            <option value="edad">Buscar por Edad</option>
+                            <option value="nombreSueldo">Buscar por Nombre y sueldo</option>
+                            <option value="nombre">Buscar por Nombre</option>
+                        </select>
+                        <!-- Formulario para buscar por nombre-->
+                        <form id="formNombre" th:action="@{/empleados/buscarPorNombre}" method="get" style="display: none;">
+                            <label for="nombre">Buscar por nombre: </label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" />
+                            <button type="submit" class="btn btn-success mt-3">Buscar</button>
+                        </form>
+                        <!--Fin del Formulario para buscar por nombre-->
+                        <!--Formulario para buscar por edad-->
+                        <form id="formEdad" th:action="@{/empleados/buscarPorEdad}" style="display: none;">
+                        <label for="edad">Buscar por edad mayor a: </label>
+                        <input type="number" id="edad" name="edad" class="form-control">
+                        <button type="submit" class="btn btn-success mt-3">Buscar</button>
+                        </form>
+                        <!--Fin del formulario -->
+                        <!--formulario para buscar por nombre y sueldo-->
+                        <form id="formNombreSueldo" th:action="@{/empleados/buscarPorNombreYSueldo}" style="display: none;">
+                            <label for="nombre">Buscar por nombre y sueldo: </label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" />
+                            <label for="sueldo">Sueldo: </label>
+                            <input type="text" id="sueldo" name="sueldo" class="form-control">
+                            <button class="btn btn-success mt-3" type="submit">Buscar</button>
+                        </form>
+                        <!--fin del formulario-->
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-gryped">
+                            <thead class="thead thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Edad</th>
+                                    <th>Telefono</th>
+                                    <th>Sueldo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="empleado, contador : ${empleados}">
+                                    <td>[[${contador.count}]]</td>
+                                    <td>[[${empleado.nombre}]]</td>
+                                    <td>[[${empleado.apellidos}]]</td>
+                                    <td>[[${empleado.edad}]]</td>
+                                    <td>[[${empleado.telefono}]]</td>
+                                    <td>[[${empleado.sueldo}]]</td>
+                                    <td>
+                                        <a th:href="@{/empleados/editarEmpleado/{id}(id=${empleado.idEmpleado})}"
+                                            class="btn btn-info">Editar</a>
+                                        <a th:href="@{/empleados/eliminarEmpleado/{id}(id=${empleado.idEmpleado})}"
+                                            class="btn btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a th:href="@{/empleados/agregarEmpleado}" class="btn btn-success">Agregar</a>
+                    </div>
+                    <div class="card-footer">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function mostrarFormulario(){
+            var seleccion =document.getElementById("metodoBusqueda").value;
+            //ocultar todos los formularios
+            document.getElementById("formNombre").style.display = "none";
+            document.getElementById("formEdad").style.display = "none";
+            document.getElementById("formNombreSueldo").style.display = "none";
+            //mostrar el formulario seleccionado
+            if(seleccion === "nombre"){
+                document.getElementById("formNombre").style.display = "block";
+            }else if(seleccion === "edad"){
+                document.getElementById("formEdad").style.display = "block";
+            }else if(seleccion === "nombreSueldo"){
+                document.getElementById("formNombreSueldo").style.display = "block";
+            }
+        }
+        //se llama la funcion para mostrar el formulario 
+        document.addEventListener("DOMContentLoaded", function(){
+            mostrarFormulario();//se muestra el formulario correcto
+        });
+    </script>
 </body>
+
 </html>
