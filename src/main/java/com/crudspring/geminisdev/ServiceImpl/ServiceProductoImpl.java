@@ -51,4 +51,9 @@ public class ServiceProductoImpl implements ProductoService {
     public List<Producto> listarProductosCategorias(String categoria) {
         return productoDao.findByCategoria(categoria);
     }
+    
+    @Override
+    public List<Producto> buscarProductoPorNombre(String nombre) {
+        return productoDao.buscarPorNombre(nombre);
+    }
 }

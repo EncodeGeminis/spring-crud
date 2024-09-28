@@ -13,4 +13,6 @@ public interface ProductoService {
     public List<Producto> listarProductos();
     public List<String> listarCategoriasUnicas();
     public List<Producto> listarProductosCategorias(String categoria);
+    //metodos personalizados en el repositorio
+    public List<Producto> buscarProductoPorNombre(String nombre);
 }
