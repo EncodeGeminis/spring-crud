@@ -35,8 +35,22 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         var empleado = empleadoDao.findById(id).orElse(null);
         return empleado;
     }
+    @Override
+    public List<Empleado> buscarPorNombre(String nombre){
+        return empleadoDao.findByNombre(nombre);
+    }
+    @Override
+    public List<Empleado> obtenerEmpleadosPorEdadMayor(int edad){
+        return empleadoDao.findByEdadGreaterThan(edad);
+    }
+    @Override
+    public List<Empleado> obtenerEmpleadoPorNombreYSueldo(String nombre, int sueldo){
+        return empleadoDao.findByNombreAndSueldo(nombre, sueldo);
+    }
 
-    /*
+}
+
+/*
      * @Override
     // metodos avanzados de busqueda
     // paginacion
@@ -52,4 +66,3 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         return empleadoDao.findByNombreContaining(nombre, sort);
     }
      */
-}

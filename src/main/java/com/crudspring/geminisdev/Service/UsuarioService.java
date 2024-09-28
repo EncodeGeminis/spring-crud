@@ -2,6 +2,7 @@ package com.crudspring.geminisdev.Service;
 
 import java.util.List;
 
+
 import com.crudspring.geminisdev.Entity.Usuario;
 
 public interface UsuarioService {
@@ -13,4 +14,8 @@ public interface UsuarioService {
     public Usuario buscarPorNombre(String nombre);
     public Usuario obtenerUsuarioPorId(Long id);
     public void actualizarUsuario(Usuario usuario);
+    //metodos personalizados
+    public List<Usuario> buscarListaNombres(String nombre);
+    public List<Usuario> buscarPorNombreParcial(String nombre);
+
 }

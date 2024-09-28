@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista Usuarios</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
 
     <header>
@@ -27,7 +29,7 @@
                         <li class="nav-item px-2">
                             <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
                         </li>
-                        <li class="nav-item px-2"></li>
+                        <li class="nav-item px-2">
                             <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
                         </li>
                     </ul>
@@ -40,33 +42,82 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
-                    <table class="table table-stryped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Edad</th>
-                                <th>Telefono</th>
-                                <th>Puntos</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="usuario : ${usuarios}">
-                                <td>[[${usuario.nombre}]]</td>
-                                <td>[[${usuario.edad}]]</td>
-                                <td>[[${usuario.telefono}]]</td>
-                                <td>[[${usuario.puntos}]]</td>
-                                <td>
-                                        <a th:href="@{/usuarios/editarUsuario/{id}(id=${usuario.idUsuario})}" class="btn btn-primary">Editar</a>
-                                        <a th:href="@{/usuarios/eliminarUsuario/{id}(id=${usuario.idUsuario})}" class="btn btn-danger">Eliminar</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="card-header">
+                        <label for="metodoBusqueda">Seleccione un metodo de busqueda: </label>
+                        <select name="metodoBusqueda" id="metodoBusqueda" class="form-control"
+                            onchange="mostrarFormulario()">
+                            <option value="default" selected>Buscar</option>
+                            <option value="nombre">Buscar por nombre</option>
+                            <option value="nombreParcial">Buscar por nombre parcial</option>
+                        </select>
+                        <!--formulario para buscar por nombre-->
+                        <form id="formNombre" th:action="@{/usuarios/buscarPorNombre}" method="get"
+                            style="display: none;">
+                            <label for="nombre">Buscar por nombre: </label>
+                            <input type="text" name="nombre" id="nombre" class="form-control" />
+                            <button type="submit" class="btn btn-success mt-3">Buscar</button>
+                        </form>
+                        <!--formulario para buscar por nombre parcial-->
+                        <form id="formNombreParcial" th:action="@{/usuarios/buscarPorNombreParcial}" method="get"
+                            style="display: none;">
+                            <label for="nombre">Buscar por nombre Parcial: </label>
+                            <input type="text" name="nombre" id="nombreParcial" class="form-control" />
+                            <button type="submit" class="btn btn-success mt-3">Buscar</button>
+                        </form>
+                        <!--fin del formulario-->
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Edad</th>
+                                    <th>Telefono</th>
+                                    <th>Puntos</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <td>[[${usuario.nombre}]]</td>
+                                    <td>[[${usuario.edad}]]</td>
+                                    <td>[[${usuario.telefono}]]</td>
+                                    <td>[[${usuario.puntos}]]</td>
+                                    <td>
+                                        <a th:href="@{/usuarios/editarUsuario/{id}(id=${usuario.idUsuario})}"
+                                            class="btn btn-primary">Editar</a>
+                                        <a th:href="@{/usuarios/eliminarUsuario/{id}(id=${usuario.idUsuario})}"
+                                            class="btn btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <a th:href="@{/usuarios/nuevo}" class="btn btn-success">Agregar Usuario</a>
             </div>
         </div>
     </div>
+
+
+    <script>
+        function mostrarFormulario() {
+            var seleccion = document.getElementById("metodoBusqueda").value;
+            //se ocultan todos los formularios
+            document.getElementById("formNombre").style.display = "none";
+            document.getElementById("formNombreParcial").style.display = "none";
+
+            if (seleccion === "nombre") {
+                document.getElementById("formNombre").style.display = "block";
+            } else if (seleccion === "nombreParcial") {
+                document.getElementById("formNombreParcial").style.display = "block";
+            }
+        }
+        //se llama la funcion para mostrar el formulario
+        document.addEventListener("DOMContentLoaded", function () {
+            mostrarFormulario();
+        });
+    </script>
 </body>
+
 </html>

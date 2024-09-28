@@ -10,12 +10,11 @@ public interface EmpleadoService {
     public List<Empleado> listaEmpleados();
     public void eliminarEmpleado(Long id);
     public Empleado buscarEmpleadoPorId(Long id);
-
-    /*
-     * //metodos avanzados de busqueda 
-    //paginacion 
-    public Page<Empleado> buscarEmpleadosPaginados(String nombre, int page, int size);
-    // Ordenación
-    public List<Empleado> buscarEmpleadosConOrden(String nombre);
-     */
+    //metodos que implementan el uso de busquedas personalizadas en el repositorio
+    public List<Empleado> buscarPorNombre(String nombre);
+    //metodo para validar que un empleado tenga mas de cierta edad
+    public List<Empleado>  obtenerEmpleadosPorEdadMayor(int edad);
+    //metodo que permite realizar la busqueda de los empleados que tienen el mismo nombre y la misma edad dada
+    public List<Empleado> obtenerEmpleadoPorNombreYSueldo(String nombre, int sueldo);
 }
+

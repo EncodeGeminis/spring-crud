@@ -27,6 +27,10 @@
                                 th:field="*{nombre}">
                         </div>
                         <div class="form-group">
+                            <label for="apellidos">Apellidos: </label>
+                            <input type="text" class="form-control" name="apellidos" id="apellidos" th:field="*{apellidos}">
+                        </div>
+                        <div class="form-group">
                             <label for="edad">Edad: </label>
                             <input type="text" class="form-control" name="edad" id="edad" th:field="*{edad}">
                         </div>
@@ -34,6 +38,10 @@
                             <label for="telefono">Telefono: </label>
                             <input type="text" class="form-control" placeholder="telefono" name="telefono"
                                 th:field="*{telefono}">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidos">Sueldo: </label>
+                            <input type="text" class="form-control" name="sueldo" id="sueldo" th:field="*{sueldo}">
                         </div>
                         <button class="btn btn-success btn-block">Guardar</button>
                     </form>

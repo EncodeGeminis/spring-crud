@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.crudspring.geminisdev.Entity.Empleado;
 import com.crudspring.geminisdev.Service.EmpleadoService;
@@ -49,5 +50,29 @@ public class EmpleadoController {
         model.addAttribute("empleado", empleado);
         return "editarEmpleado";
     }
+    @GetMapping("/buscarPorNombre")
+    public String buscarEmpleadoPorNombre(@RequestParam("nombre") String nombre, Model model){
+        var empleados = empleadoService.buscarPorNombre(nombre);
+        model.addAttribute("empleados", empleados);
+        return "empleados";
+    }
+    //Endpoint para obtener empleados mayor a una edad dada
+    @GetMapping("/buscarPorEdad")
+    public String buscarPorEdad(@RequestParam("edad") int edad, Model model) {
+        var empleados = empleadoService.obtenerEmpleadosPorEdadMayor(edad);
+        model.addAttribute("empleados", empleados);
+        model.addAttribute("edad", edad);
+        return "empleados";
+    }
+    //metodo para filtrar resultados por nombre y sueldo
+    @GetMapping("/buscarPorNombreYSueldo")
+    public String buscarPorNombreYSueldo(@RequestParam("nombre")String nombre, 
+    @RequestParam("sueldo") int sueldo, Model model ) {
+        var empleados=empleadoService.obtenerEmpleadoPorNombreYSueldo(nombre, sueldo);
+        model.addAttribute("empleados", empleados);
+        model.addAttribute("sueldo", sueldo);
+        return "empleados";
+    }
+    
     
 }

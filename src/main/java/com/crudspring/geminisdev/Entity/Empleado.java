@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Empleados")
+@Table(name="empleados")
 public class Empleado implements Serializable {
     private static final long serialVersionUID=1L;
     
@@ -17,16 +17,20 @@ public class Empleado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmpleado;
     private String nombre;
+    private String apellidos;
     private int edad;
-    private int telefono;
+    private String telefono;
+    private int sueldo;
 
     public Empleado(){}
 
-    public Empleado(Long idEmpleado, String nombre, int edad, int telefono) {
+    public Empleado(Long idEmpleado, String nombre, String apellidos, int edad, String telefono, int sueldo) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
+        this.apellidos = apellidos;
         this.edad = edad;
         this.telefono = telefono;
+        this.sueldo = sueldo;
     }
 
     public Long getIdEmpleado() {
@@ -44,6 +48,23 @@ public class Empleado implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public int getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(int sueldo) {
+        this.sueldo = sueldo;
+    }
 
     public int getEdad() {
         return edad;
@@ -53,11 +74,11 @@ public class Empleado implements Serializable {
         this.edad = edad;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 }
