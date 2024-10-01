@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Solicitud Credito</title>
+        <!--css icons-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!--End css icons-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <form th:action="@{/creditos/editar}" th:object="${solicitudCredito}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                    
+                        <div class="form-group">
+                            <label for="montoSolicitado">Monto solicitado:</label>
+                            <input class="form-control" type="number" id="montoSolicitado" th:field="*{montoSolicitado}" required>
+                        </div>
+                        
+                    <div class="form-group">
+                        <label for="motivoSolicitud">Motivo de solicitud:</label>
+                        <input class="form-control" type="text" id="motivoSolicitud" th:field="*{motivoSolicitud}" required>
+                    </div>
+                        <label for="tipoCredito">Tipo de crédito:</label>
+                        <select class="form-control" id="tipoCredito" th:field="*{tipoCredito}">
+                            <option value="tarjeta">Tarjeta de crédito</option>
+                            <option value="prestamo">Préstamo personal</option>
+                        </select>
+                    
+                        <button class="btn btn-success" type="submit">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud Credito</title>
+    <!--css icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--End css icons-->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+            <div class="container">
+                <a th:href="@{/}" class="navbar-brand">Aplicacion Web Test</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/inventario}" class="nav-link active">Inventario</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/ventas}" class="nav-link active">Ventas</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/usuarios/lista}" class="nav-link active">Usuarios</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/empleados/listaEmpleados}" class="nav-link active">Empleados</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/ventas/historialVentas}" class="nav-link active">Historial</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/clientes/lista}" class="nav-link active">Clientes</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/creditos/mostrarCreditos}" class="nav-link active">Solicitar Credito</a>
+                        </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/creditos/listaSolicitud}" class="nav-link active">Lista Solicitudes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--seccion titulo-->
+        <section id="main-heder" class="py-2 bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Solicitar Credito</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <form class="form-group" th:action="@{/creditos/solicitarCredito}"
+                            th:object="${solicitudCredito}" method="post">
+                            <div class="form-group">
+                                <label for="cliente">Cliente:</label>
+                                <select class="form-select" th:field="*{cliente.idCliente}">
+                                    <option th:each="cliente : ${clientes}" th:value="${cliente.idCliente}"
+                                        th:text="${cliente.nombre}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="montoSolicitado">Monto solicitado:</label>
+                                <input class="form-control" type="number" id="montoSolicitado"
+                                    th:field="*{montoSolicitado}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="motivoSolicitud">Motivo de solicitud:</label>
+                                <input class="form-control" type="text" id="motivoSolicitud"
+                                    th:field="*{motivoSolicitud}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipoCredito">Tipo de crédito:</label>
+                                <select class="form-select" id="tipoCredito" th:field="*{tipoCredito}">
+                                    <option value="tarjeta">Tarjeta de crédito</option>
+                                    <option value="prestamo">Préstamo personal</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-success btn-block mt-3" type="submit">Solicitar crédito</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

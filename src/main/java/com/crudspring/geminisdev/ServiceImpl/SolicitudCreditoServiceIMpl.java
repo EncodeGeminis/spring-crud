@@ -25,7 +25,7 @@ public class SolicitudCreditoServiceIMpl implements SolicitudCreditoService {
     }
 
     @Override
-    public SolicitudCredito obtenerSolicitudCreditoporId(Long id) {
+    public SolicitudCredito obtenerSolicitudCreditoPorId(Long id) {
         return solicitudCreditoDao.findById(id).orElse(null);
     }
 

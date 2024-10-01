@@ -31,7 +31,9 @@ public class SolicitudCredito implements Serializable {
     private double montoAprobado;
     private String tipoCredito; //tarjeta de credito, prestamo personal
     private double limiteCredito;
+
     public SolicitudCredito() {}
+    
     public SolicitudCredito(Long id, Cliente cliente, double montoSolicitado, Date fechaSolicitud,
             String motivoSolicitud, String estado, double montoAprobado,
             String tipoCredito, double limiteCredito) {

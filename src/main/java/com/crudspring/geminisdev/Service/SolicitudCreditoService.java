@@ -7,6 +7,7 @@ import com.crudspring.geminisdev.Entity.SolicitudCredito;
 public interface SolicitudCreditoService {
     public List<SolicitudCredito> obtenerSolicitudes();
     public SolicitudCredito guardarSolicitudCredito(SolicitudCredito solicitudCredito);
-    public SolicitudCredito obtenerSolicitudCreditoporId(Long id);
+    public SolicitudCredito obtenerSolicitudCreditoPorId(Long id);
     public void eliminarSolicitudCredito(Long id);
+
 }

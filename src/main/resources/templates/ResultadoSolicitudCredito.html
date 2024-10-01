@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de clientes</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <title>Resultado Solicitud Crédito</title>
+    <!--css icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--End css icons-->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-</head>
 
+</head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
@@ -43,6 +45,9 @@
                         <li class="nav-item px-2"></li>
                             <a th:href="@{/creditos/mostrarCreditos}" class="nav-link active">Solicitar Credito</a>
                         </li>
+                        <li class="nav-item px-2"></li>
+                            <a th:href="@{/creditos/listaSolicitud}" class="nav-link active">Lista Solicitudes</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -53,49 +58,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1>Lista Clientes</h1>
+                        <h1>Resultado Solicitud</h1>
                     </div>
                 </div>
             </div>
         </section>
     </header>
-    <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <table class="table table-striped">
-                            <thead class="thead thead-dark">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>CURP</th>
-                                    <th>RFC</th>
-                                    <th>Telefono</th>
-                                    <th>Email</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="cliente : ${clientes}">
-                                    <td th:text="${cliente.idCliente}"></td>
-                                    <td th:text="${cliente.nombre}"></td>
-                                    <td th:text="${cliente.curp}"></td>
-                                    <td th:text="${cliente.rfc}"></td>
-                                    <td th:text="${cliente.telefono}"></td>
-                                    <td th:text="${cliente.email}"></td>
-                                    <td>
-                                        <a class="btn btn-info" th:href="@{/clientes/editarCliente/{id}(id=${cliente.idCliente})}">Editar</a>
-                                        <a class="btn btn-danger" th:href="@{/clientes/eliminarCliente/{id}(id=${cliente.idCliente})}">Eliminar</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a class="btn btn-success btn-block" th:href="@{/clientes/nuevoCliente}">Agregar nuevo cliente</a>
-                    </div>
+    <divc class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <h1 th:text="${mensaje}"></h1>
+                    <a  class="btn btn-info" th:href="@{/creditos/listaSolicitud}">Volver a la página anterior</a>            
                 </div>
             </div>
         </div>
-
+    </div>
 </body>
-
 </html>
