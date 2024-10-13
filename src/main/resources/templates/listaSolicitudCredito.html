@@ -75,6 +75,7 @@
                                 <th>Estado</th>
                                 <th>acciones</th>
                                 <th>funciones</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,7 +93,10 @@
                                         <a th:href="@{/creditos/editarSolicitud/{id}(id=${solicitud.id})}" class="btn btn-primary">Editar</a>
                                         <a th:href="@{/creditos/eliminarSolicitud/{id}(id=${solicitud.id})}" class="btn btn-danger" 
                                             onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?');">Eliminar</a>
-                                    </td>                                
+                                    </td> 
+                                    <td>
+                                        <a th:href="@{/creditos/tarjetaCredito/{clienteId}(clienteId=${solicitud.cliente.idCliente})}" class="btn btn-info">Ver Tarjeta</a>
+                                    </td>                               
                             </tr>
                         </tbody>
                     </table>

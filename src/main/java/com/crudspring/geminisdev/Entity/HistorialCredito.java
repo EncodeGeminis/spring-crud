@@ -74,6 +74,9 @@ public class HistorialCredito implements Serializable {
     public void setEstadoPago(String estadoPago) {
         this.estadoPago = estadoPago;
     }
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
     
     
 }
