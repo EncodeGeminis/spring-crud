@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle de Tarjeta de Crédito</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Tarjetas de Crédito Asignadas</h2>
+    
+        <!-- Iterar sobre la lista de tarjetas -->
+        <div th:each="tarjeta : ${tarjetaCredito}" th:if="${tarjeta != null}">
+            <div class="card">
+                <div class="card-header">
+                    Número de Tarjeta: <span th:text="${tarjeta.numeroTarjeta}"></span>
+                </div>
+                <div class="card-body">
+                    <p><strong>Limite de Crédito:</strong> $<span th:text="${tarjeta.limiteCredito}"></span></p>
+                    <p><strong>Plazo en Meses:</strong> <span th:text="${tarjeta.plazoEnMeses}"></span></p>
+                    <p><strong>Tasa de Interés:</strong> <span th:text="${tarjeta.tasaInteres}"></span></p>
+                    <p><strong>Fecha Límite de Pago:</strong> <span th:text="${tarjeta.fechaLimitePago}"></span></p>
+                </div>
+                <div class="card-footer">
+                    <!-- Formulario para realizar el pago -->
+                    <form action="#" th:action="@{/tarjetaCredito/pagar}" method="post">
+                        <input type="hidden" name="tarjetaId" th:value="${tarjeta.id}" />
+                        <div class="form-group">
+                            <label for="montoPago">Monto a pagar:</label>
+                            <input type="number" class="form-control" id="montoPago" name="montoPago" step="0.01" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Realizar Pago</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Mensaje en caso de error -->
+        <div th:if="${mensaje != null}">
+            <p th:text="${mensaje}" class="alert alert-danger"></p>
+        </div>
+    </div>   
+    
+</body>
+</html>
