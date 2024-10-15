@@ -10,6 +10,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+    <style>
+        .btn-jugadores{
+            background-color: rgb(226, 43, 156);
+            color: white;
+            text-align: center;
+            font-weight: 300;
+        }
+        .btn-jugadores:hover{
+            background-color: white;
+            color: rgb(226, 43, 156);
+            transition: .5s ease;
+        }
+    </style>
+
 </head>
 <body>
     <header>
@@ -69,6 +84,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <div class="col-md-6">
                 <div class="card bg-dark text-light">
                     <h1>Sistema de gestion</h1>
+                    <a class="btn-jugadores" th:href="@{/jugadores/listajugadores}">Jugadores</a>
                 </div>
             </div>
             <div class="col-md-6">

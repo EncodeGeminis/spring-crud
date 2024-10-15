@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Jugador</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <h1>Agregar un jugador</h1>
+                    <form th:action="@{/jugadores/guardarJugador}" method="post" th:object="${jugador}">
+                        <div class="form-group">
+                            <label for="nombre" id="nombre">Nombre: </label>
+                            <input class="form-control" type="text" name="nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">UserName: </label>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="correo">Correo: </label>
+                            <input class="form-control" type="email" name="correo">
+                        </div>
+                        <div class="form-group">
+                            <label for="edad" id="edad">Edad: </label>
+                            <input class="form-control" type="text" name="edad">
+                        </div>
+                        <div class="form-group">
+                            <label for="puntaje">Puntaje: </label>
+                            <input class="form-control" type="text" name="puntaje">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
