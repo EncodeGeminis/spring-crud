@@ -15,7 +15,9 @@ public interface JugadorService {
 
     //metodo que muestra los jugadores de 4 en 4
     public Page<Jugador> listarJugadores(Pageable pageable);
-    //metodo para mostrar los usuarios que tienen el mismo nombre
+    //metodo para mostrar los jugadores que tienen el mismo nombre
     public Page<Jugador> buscarPorNombreParcial(String nombre, Pageable pageable);
+    //metodo para mostrar los jugadores que tienen mayor puntaje
+    public Page<Jugador> buscarPorPuntaje(int puntaje, Pageable pageable);
 
 }

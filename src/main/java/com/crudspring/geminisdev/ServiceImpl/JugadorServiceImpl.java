@@ -47,4 +47,9 @@ public class JugadorServiceImpl implements JugadorService {
     public Page<Jugador> buscarPorNombreParcial(String nombre, Pageable pageable) {
         return jugadorDao.buscarPorNombreParcial(nombre, pageable);    
     }
+
+    @Override
+    public Page<Jugador> buscarPorPuntaje(int puntaje, Pageable pageable) {
+        return jugadorDao.findByPuntajeGreaterThan(puntaje, pageable);   
+    }
 }
