@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugadores</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-9">
                 <div class="card-header">
+                    <label for="metodoBusqueda">Seleccione un metodo de busqueda: </label>
+                    <select class="form-control" onchange="mostrarFormulario()" name="metodoBusqueda" id="metodoBusqueda">
+                        <option value="default">buscar</option>
+                        <option value="nombre">buscar por nombre: </option>
+                        <option value="puntajeMayor">buscar por puntaje mayor: </option>
+                    </select>
                     <!--formulario para buscar por nombre parcial-->
-        <form id="formNombreParcial" th:action="@{/jugadores/buscarPorNombreParcial}" method="get">
-            <label for="nombre">Buscar por nombre Parcial: </label>
-            <input type="text" name="nombre" id="nombreParcial" class="form-control" />
-            <button type="submit" class="btn btn-success mt-3">Buscar</button>
-        </form>
-        <!--fin del formulario-->
-        <h1 th:text="${mensaje}"></h1>
-    <a class="btn btn-dark" th:href="@{/jugadores/formularioJugadores}">Agregar Jugador</a>
-    
+                    <form id="formNombreParcial" th:action="@{/jugadores/buscarPorNombreParcial}" method="get" style="display: none;">
+                        <label for="nombre">Buscar por nombre Parcial: </label>
+                        <input type="text" name="nombre" id="nombreParcial" class="form-control" />
+                        <button type="submit" class="btn btn-success mt-3">Buscar</button>
+                    </form>
+                    <!--fin del formulario-->
+                    <!--Formulario para buscar por puntaje-->
+                    <form id="formPuntaje" th:action="@{/jugadores/buscarPorPuntajeMayor}" method="get" style="display:none;">
+                        <label for="edad">Buscar por puntaje mayor a: </label>
+                        <input type="number" id="puntaje" name="puntaje" class="form-control">
+                        <button type="submit" class="btn btn-success mt-3">Buscar</button>
+                    </form>
+                    <!--Fin del formulario -->
+
+                    <h1 th:text="${mensaje}"></h1>
+                    <a class="btn btn-dark" th:href="@{/jugadores/formularioJugadores}">Agregar Jugador</a>
+
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
@@ -41,14 +57,16 @@
                         <tbody>
                             <tr th:each="jugador,contador : ${jugadores}">
                                 <td>[[${contador.count}]]</td>
-                                <td>[[${jugador.nombre}]]</td>
+                                <td>[[${jugador.userName}]]</td>
                                 <td>[[${jugador.correo}]]</td>
                                 <td>[[${jugador.puntaje}]]</td>
                                 <td>
-                                    <a th:href="@{/jugadores/editarJugador/{id}(id=${jugador.id})}" class="btn btn-primary">Editar</a>
+                                    <a th:href="@{/jugadores/editarJugador/{id}(id=${jugador.id})}"
+                                        class="btn btn-primary">Editar</a>
                                 </td>
                                 <td>
-                                    <a th:href="@{/jugadores/eliminarJugador/{id}(id=${jugador.id})}" class="btn btn-danger">Eliminar</a>
+                                    <a th:href="@{/jugadores/eliminarJugador/{id}(id=${jugador.id})}"
+                                        class="btn btn-danger">Eliminar</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -62,18 +80,20 @@
                                 <a class="page-link" th:href="@{/jugadores/listajugadores(page=${currentPage - 1})}"><i
                                         class='bx bxs-left-arrow'></i></a>
                             </li>
-                
+
                             <li th:each="page : ${#numbers.sequence(0, totalPages - 1)}"
                                 th:class="${currentPage == page ? 'page-item active' : 'page-item'}">
-                                <a class="page-link" th:href="@{/jugadores/listajugadores(page=${page})}">[[${page + 1}]]</a>
+                                <a class="page-link" th:href="@{/jugadores/listajugadores(page=${page})}">[[${page +
+                                    1}]]</a>
                             </li>
-                
+
                             <li th:class="${currentPage == totalPages - 1 ? 'page-item disabled' : 'page-item'}">
                                 <a class="page-link" th:href="@{/jugadores/listajugadores(page=${currentPage + 1})}"><i
                                         class='bx bxs-right-arrow'></i></a>
                             </li>
                             <li th:class="${currentPage == totalPages - 1 ? 'page-item disabled' : 'page-item'}">
-                                <a class="page-link" th:href="@{/jugadores/listajugadores(page=${totalPages - 1})}">Ultimo</a>
+                                <a class="page-link"
+                                    th:href="@{/jugadores/listajugadores(page=${totalPages - 1})}">Ultimo</a>
                             </li>
                         </ul>
                     </nav>
@@ -81,5 +101,23 @@
             </div>
         </div>
     </div>
+    <script>
+        function mostrarFormulario(){
+            var seleccion =document.getElementById("metodoBusqueda").value;
+            //ocultar todos los formularios
+            document.getElementById("formNombreParcial").style.display = "none";
+            document.getElementById("formPuntaje").style.display = "none";
+            //mostrar el formulario seleccionado
+            if(seleccion === "nombre"){
+                document.getElementById("formNombreParcial").style.display = "block";
+            }else if(seleccion === "puntajeMayor"){
+                document.getElementById("formPuntaje").style.display = "block";
+            }
+        }
+        //se llama la funcion para mostrar el formulario 
+        document.addEventListener("DOMContentLoaded", function(){
+            mostrarFormulario();//se muestra el formulario correcto
+        });
+    </script>
 </body>
 </html>

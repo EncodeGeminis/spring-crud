@@ -15,4 +15,7 @@ public interface JugadorDao extends JpaRepository<Jugador, Long> {
     @Query("SELECT j FROM Jugador j WHERE j.nombre LIKE %:nombre%")
     Page<Jugador> buscarPorNombreParcial(@Param("nombre") String nombre, Pageable pageable);
     
+    //este metodo busca los jugadores que tienen mayor puntaje
+    Page<Jugador> findByPuntajeGreaterThan(int puntaje, Pageable pageable);
+
 }

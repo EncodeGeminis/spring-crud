@@ -58,7 +58,7 @@ public class JugadorController {
     }
 
     @GetMapping("/eliminarJugador/{id}")
-    public String getMethodName(@PathVariable("id") Long id) {
+    public String eliminarJugador(@PathVariable("id") Long id) {
         jugadorService.eliminarJugador(id);
         return "redirect:/jugadores/listajugadores";
     }
@@ -82,5 +82,16 @@ public class JugadorController {
 
         return "jugadores";
     }
+    @GetMapping("/buscarPorPuntajeMayor")
+    public String buscarPorPuntajeMayor(@RequestParam("puntaje") int puntaje,
+    @RequestParam(name = "page", defaultValue = "0")int page, Model model) {
+        Pageable pageable =PageRequest.of(page, 4);
+        Page<Jugador> jugador = jugadorService.buscarPorPuntaje(puntaje, pageable);
 
+        model.addAttribute("jugadores", jugador.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", jugador.getTotalPages());
+
+        return "jugadores";
+    }    
 }
